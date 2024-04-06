@@ -54,12 +54,12 @@ public:
         }
     }
 
-    void generate_and_save_matrices() {
+    /*void generate_and_save_matrices() {
         generateRandomMatrix();
 
         writeMatrixToFile(filename_matrix1, matrix1);
         writeMatrixToFile(filename_matrix2, matrix2);
-    }
+    }*/
 
     void multiplyMatrices() {
         int* d_matrix1, * d_matrix2, * d_result_matrix;
@@ -76,8 +76,6 @@ public:
         multiplyMatricesKernel<<<numBlocks, threadsPerBlock>>>(d_matrix1, d_matrix2, d_result_matrix, size);
 
         cudaMemcpy(result_matrix, d_result_matrix, size * size * sizeof(int), cudaMemcpyDeviceToHost);
-
-        //writeMatrixToFile(filename_matrix_res, result_matrix);
 
         cudaFree(d_matrix1);
         cudaFree(d_matrix2);
